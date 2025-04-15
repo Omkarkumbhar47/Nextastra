@@ -1,6 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as bodyPix from "@tensorflow-models/body-pix";
 import "@tensorflow/tfjs";
+import { useParams } from "react-router-dom";
 import {
   Stage,
   Layer,
@@ -26,6 +27,45 @@ const ImageEditor = () => {
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [loading, setLoading] = useState(false);
+  const { imageId } = useParams();
+
+  useEffect(() => {
+    if (imageId) {
+      // Fetch the image and rects from backend
+      const fetchData = async () => {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`http://localhost:5000/api/image/${imageId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+
+        const img = new window.Image();
+        img.src = data.imageUrl;
+        img.onload = () => {
+          setImage(img);
+          const scale = Math.min(MAX_WIDTH / img.width, MAX_HEIGHT / img.height, 1);
+          setScaledDims({
+            width: img.width * scale,
+            height: img.height * scale,
+            scale,
+          });
+          // Scale rects too:
+          const scaledRects = data.rects.map(r => ({
+            ...r,
+            x: r.x * scale,
+            y: r.y * scale,
+            width: r.width * scale,
+            height: r.height * scale,
+            stroke: "red",
+            draggable: true,
+          }));
+          setRects(scaledRects);
+          setUploadedImageId(imageId);
+        };
+      };
+      fetchData();
+    }
+  }, [imageId]);
 
   const handleWheel = (e) => {
     e.evt.preventDefault();

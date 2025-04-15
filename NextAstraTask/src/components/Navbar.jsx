@@ -47,6 +47,9 @@ const Navbar = () => {
             </>
           ) : (
             <>
+            <Link to="/upload" className="text-white">Upload</Link>
+<Link to="/my-uploads" className="text-white">My Uploads</Link>
+
               <Link to="/dashboard" className={linkClasses("/dashboard")}>
                 Dashboard
               </Link>

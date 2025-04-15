@@ -68,12 +68,12 @@ const MyUploads = () => {
                 alt="uploaded"
                 className="w-full h-48 object-cover rounded"
               />
-              {/* <button
-                onClick={() => navigate(`/edit/${img._id}`)}
-                className="mt-3 w-full bg-blue-600 hover:bg-blue-700 py-2 rounded"
+               <button
+                onClick={() => navigate(`/edit/${img.imageId || img._id}`)}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
               >
                 Edit
-              </button> */}
+              </button>
             </div>
           ))}
         </div>
