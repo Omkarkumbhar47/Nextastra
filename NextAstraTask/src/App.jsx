@@ -2,8 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Navbar from "./components/Navbar"; // 👈 Import the Navbar
+import Navbar from "./components/Navbar"; 
 import ImageUploader from "./components/ImageUploader.jsx";
 import Home from "./components/Home.jsx";
 import MyUploads from "./components/MyUploads.jsx";
@@ -20,7 +19,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<ImageUploader />} />
-            {/* <Route path="/my-uploads" element={<MyUploads />} /> */}
             <Route path="/my-uploads" element={<MyUploads />} />
             <Route path="/edit/:imageId" element={<ImageEditor />} />
           </Routes>

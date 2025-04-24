@@ -4,18 +4,20 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 
 const router = express.Router();
+
 module.exports = async function (req, res, next) {
   const authHeader = req.headers.authorization;
+   // Check if token exists in header
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ message: "No token provided" });
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1];// Extract the token from "Bearer <token>"
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded.userId).select("-password");
-    next();
+    next(); 
   } catch (err) {
     console.error("Auth error:", err);
     res.status(401).json({ message: "Invalid token" });

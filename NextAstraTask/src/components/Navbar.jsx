@@ -30,7 +30,10 @@ const Navbar = () => {
     <nav className="w-full bg-gray-900 text-white shadow-md">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold text-purple-400 hover:text-purple-300 transition">
+        <Link
+          to="/"
+          className="text-xl font-bold text-purple-400 hover:text-purple-300 transition"
+        >
           MyApp
         </Link>
 
@@ -47,8 +50,12 @@ const Navbar = () => {
             </>
           ) : (
             <>
-            <Link to="/upload" className="text-white">Upload</Link>
-<Link to="/my-uploads" className="text-white">My Uploads</Link>
+              {/* <Link to="/upload" className="text-white">
+                Upload
+              </Link> */}
+              <Link to="/my-uploads" className={linkClasses("/my-uploads")}>
+                My Uploads
+              </Link>
 
               <Link to="/dashboard" className={linkClasses("/dashboard")}>
                 Dashboard

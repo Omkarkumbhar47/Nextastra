@@ -11,7 +11,7 @@ const Home = () => {
   }, []);
 
   const goToEditor = () => {
-    navigate("/dashboard"); // Change if your route differs
+    navigate("/dashboard"); 
   };
 
   const goToLogin = () => {
@@ -19,7 +19,7 @@ const Home = () => {
   };
 
   const goToSignup = () => {
-    navigate("/signup");
+    navigate("/register");
   };
 
   return (
